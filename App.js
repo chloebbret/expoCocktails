@@ -1,32 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-const Stack = createNativeStackNavigator();
+import BottomNav from "./component/bottomNav";
+import FavScreen from "./component/FavScreen";
+const Tab = createBottomTabNavigator();
 
-function HomeScreen({ navigation }) {
+function HomeScreen() {
   return (
-    <View style={styles.homeScreen}>
-      <Text>HomeScreen</Text>
-      <Button
-        title="Go to details"
-        onPress={() => navigation.navigate('Details')}
-      />
+    <View style={styles.screen}>
+      <Text>Home Screen</Text>
     </View>
   );
 }
 
-function DetailsScreen({ navigation }) {
+function DetailsScreen() {
   return (
-    <View style={styles.homeScreen}>
-      <Text>DetailsScreen</Text>
-      <Button
-        title="Go to details ... again"
-        onPress={() => navigation.push('Details')}
-      />
-      <Button title="Go to home" onPress={() => navigation.navigate('Home')} />
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+    <View style={styles.screen}>
+      <Text>Details Screen</Text>
+    </View>
+  );
+}
+
+function FavScreen() {
+  return (
+    <View style={styles.screen}>
+      <Text>Fav Screen</Text>
     </View>
   );
 }
@@ -35,16 +35,16 @@ export default function App() {
   return (
     <NavigationContainer>
       <StatusBar style="auto" />
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-      </Stack.Navigator>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Favorites" component={FavScreen} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  homeScreen: {
+  screen: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
